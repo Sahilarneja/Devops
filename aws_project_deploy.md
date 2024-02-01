@@ -3,7 +3,7 @@
 ## Initial Setup
 
 ### Clone the Project
-git clone <URL>
+git clone "URL"
 
 ### Initialise and Start the Project
 cd <project-directory>
@@ -36,7 +36,7 @@ sudo apt update
 ## Deploying the Project on AWS
 
 ### Clone the Project in the Remote VM
-git clone <URL>
+git clone "URL"
 
 ### Set Up an Elastic IP Address for Your EC2 (This will be your DOMAIN)
 
