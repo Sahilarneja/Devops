@@ -48,5 +48,3 @@ npm run start
 **Note:** Edit the inbound rules in the security group of your EC2 to allow traffic from your specific port.
 
 ## Project is Deployed on AWS 🎉
-
-Your project is now successfully deployed on AWS. Access it using the Elastic IP Address associated with your EC2 instance.
