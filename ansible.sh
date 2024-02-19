@@ -94,3 +94,51 @@ vim create_user.yml
 
 # Execute playbook-2 to create a user
 ansible-playbook create_user.yml -i /home/ubuntu/ansible/hosts --private-key=~/.ssh/ansible_key
+
+
+#Playbook 3 : install Nginx
+# ---
+# - hosts: nginxservers
+#   become: yes
+#   tasks:
+#     - name: update
+#       apt:
+#         update_cache: yes
+
+#     - name: Install Nginx
+#       apt:
+#         name: nginx
+#         state: latest
+#       notify:
+#         - restart nginx
+
+#   handlers:
+#     - name: restart nginx
+#       service:
+#         name: nginx
+#         state: reloaded
+
+
+#playbook 4 : install docker
+# ---
+# - name: This playbook will install Docker
+#   hosts: all
+#   become: true
+#   tasks:
+#     - name: Add Docker GPG apt key
+#       apt_key:
+#         url: https://download.docker.com/linux/ubuntu/gpg
+#         state: present
+
+#     - name: Add Docker Repository
+#       apt_repository:
+#         repo: deb https://download.docker.com/linux/ubuntu focal stable
+#         state: present
+
+
+#     - name: Install Docker
+#       apt:
+#         name: docker-ce
+#         state: latest
+
+# execute both these playbooks too using above command
