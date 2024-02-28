@@ -1,8 +1,8 @@
 # Define the provider block with AWS credentials and region
 provider "aws"{
     region     = "us-east-1"
-    access_key = "AKIA6CYY7S6CKAADO45O"
-    secret_key = "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"
+    access_key = "my_access_key"
+    secret_key = "my_secret_key"
 }
 
 #1. Create a Virtual Private Cloud (VPC) with a specified CIDR block and tags
