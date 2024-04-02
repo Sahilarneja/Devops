@@ -1,0 +1,46 @@
+version: '3'
+
+# Services section defines the Docker services composing the application
+services:
+
+  # MongoDB service configuration
+  mongodb: 
+    # Specifies the Docker image to use for the MongoDB container
+    image: mongo
+    # Maps port 27017 on the host machine to port 27017 inside the container, allowing external access
+    ports:
+      - "27017:27017"
+    # Sets environment variables within the MongoDB container, such as the root username and password
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    # Defines data volumes to persist MongoDB data. The 'mongo-data' volume is mounted to '/data/db' in the container
+    volumes:
+      - mongo-data:/data/db
+    # Restart policy ensures the container restarts automatically unless explicitly stopped
+    restart: unless-stopped
+
+  # Mongo Express service configuration
+  mongo-express:
+    # Specifies the Docker image to use for the Mongo Express container
+    image: mongo-express
+    # Always restart the container if it stops
+    restart: always
+    # Maps port 8081 on the host machine to port 8081 inside the container, allowing external access
+    ports:
+      - "8081:8081"
+    # Sets environment variables within the Mongo Express container, such as the MongoDB admin username and password
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+
+# Volumes section defines named volumes for persisting data
+volumes:
+  # Defines the 'mongo-data' named volume using the local volume driver
+  mongo-data:
+    driver: local
+
+# Commands used:
+# - To start the services: docker-compose -f docker-compose.yaml up
+# - To stop and remove the services: docker-compose -f docker-compose.yaml down
