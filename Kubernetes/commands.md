@@ -1,25 +1,16 @@
-#!/bin/bash
 
-# Kubernetes Installation
+# Kubernetes Installation and Usage Guide
 
-# Add Kubernetes apt repository key
+# Add Kubernetes apt repository key and update apt package index
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/kubernetes-archive-keyring.gpg
-
-# Add Kubernetes apt repository
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null
-
-# Update apt package index
 sudo apt-get update
 
 # Install kubectl
 sudo apt-get install -y kubectl
 
 # Install Minikube
-
-# Add Minikube binary to PATH
 export PATH="$PATH:/home/ubuntu/.local/bin/"
-
-# Download and install Minikube binary
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
 
@@ -32,9 +23,7 @@ kubectl get nodes
 # Create and manage Pods
 
 # Create a Pod from a YAML file (replace pod.yaml with your YAML file)
-kubectl create -f pod.yaml
-
-# Create a Pod using Nginx as an example
+cat <<EOF > pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -45,19 +34,16 @@ spec:
     image: nginx
     ports:
     - containerPort: 80
+EOF
 
+# Apply the Pod YAML file
+kubectl apply -f pod.yaml
 
 # Get Pods
 kubectl get pods
 
 # Get Pods with wide output
 kubectl get pods -o wide
-
-# Get detailed information about a Pod
-kubectl describe pod <pod-name>
-
-# Delete a Pod
-kubectl delete pod <pod-name>
 
 # Additional Commands
 
