@@ -23,7 +23,6 @@ kubectl get nodes
 # Create and manage Pods
 
 # Create a Pod from a YAML file (replace pod.yaml with your YAML file)
-cat <<EOF > pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -34,7 +33,7 @@ spec:
     image: nginx
     ports:
     - containerPort: 80
-EOF
+
 
 # Apply the Pod YAML file
 kubectl apply -f pod.yaml
